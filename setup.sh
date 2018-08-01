@@ -32,7 +32,7 @@ sudo yum install cmake openssl-devel -y
 sleep 3
 echo "Step 2. wget mosquitto.tar & unarchive" 
 cd ~
-wget http://mosquitto.org/files/source/mosquitto-1.4.7.tar.gz
+sudo wget http://mosquitto.org/files/source/mosquitto-1.4.7.tar.gz
 sudo tar -xzvf mosquitto-1.4.7.tar.gz
 cd ~/mosquitto-1.4.7
 
@@ -40,11 +40,11 @@ cd ~/mosquitto-1.4.7
 echo "Step 3. wget c-ares & unarchive" 
 sleep 3
 cd ~/mosquitto-1.4.7
-wget http://c-ares.haxx.se/download/c-ares-1.10.0.tar.gz
+sudo wget http://c-ares.haxx.se/download/c-ares-1.10.0.tar.gz
 sudo tar xvf c-ares-1.10.0.tar.gz
 cd c-ares-1.10.0
-./configure
-make
+sudo ./configure
+sudo make
 sudo make install
 
 
@@ -56,7 +56,7 @@ sudo yum install libuuid-devel -y
 sleep 3
 echo "Step 5. wget libwebsockets  & unarchive" 
 #cd ~/mosquitto-1.4.7
-wget https://github.com/warmcat/libwebsockets/archive/v1.3-chrome37-firefox30.tar.gz
+sudo wget https://github.com/warmcat/libwebsockets/archive/v1.3-chrome37-firefox30.tar.gz
 sudo tar zxvf v1.3-chrome37-firefox30.tar.gz
 cd libwebsockets-1.3-chrome37-firefox30
 sudo mkdir build
@@ -84,12 +84,12 @@ sudo useradd -g mosuqitto mosquitto
 sleep 3
 echo "Step 9. mosquitto_pub & sub configure"
 
-sudo cat > /etc/ld.so.conf << EOF
+sudo bash -c 'cat > /etc/ld.so.conf << EOF
 include ld.so.conf.d/*.conf
 include /usr/local/lib
 /usr/lib
 /usr/local/lib
-EOF
+EOF'
 
 sudo /sbin/ldconfig
 sudo ln -s /usr/local/lib/libmosquitto.so.1 /usr/lib/libmosquitto.so.1
